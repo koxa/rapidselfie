@@ -1,0 +1,38 @@
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+#videoCapture{
+	margin: 0 auto;
+}
+#picturePreview{
+	margin: 0 auto;
+	text-align: center;
+}
+#btnContainer{
+	text-align: center;
+	margin-top: 20px;
+}
+#snapBtn{}
+/*#deleteBtn{display: none;}*/
+/*#saveBtn{display: none;}*/
+#linkContainer{
+	text-align: center;
+	margin-top: 20px;
+}
+#link{
+	width: 420px;
+	margin: 0 auto;
+}
