@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/rapidselfie-dev',
+	db: 'mongodb://52.8.2.199/rapidselfie-dev',
 	app: {
 		title: 'RapidSelfie - Development Environment'
 	},
