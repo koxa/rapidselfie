@@ -12,6 +12,9 @@
 		"test": "grunt test",
 		"postinstall": "node_modules/.bin/bower --allow-root install --config.interactive=false"
 	},
+	"config": {
+    	"unsafe-perm":true
+	},
 	"dependencies": {
 		"express": "~4.10.1",
 		"express-session": "~1.9.1",
