@@ -10,7 +10,7 @@
 	"scripts": {
 		"start": "grunt",
 		"test": "grunt test",
-		"postinstall": "node_modules/bower/bin/bower install --allow-root --config.interactive=false"
+		"postinstall": "sudo ./node_modules/bower/bin/bower install --allow-root --config.interactive=false"
 	},
 	"config": {
     	"unsafe-perm":true
