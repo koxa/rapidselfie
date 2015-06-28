@@ -11,4 +11,9 @@
 		<p>Link to your Selfie: </p>
 		<input type='text' value="{{link}}" id='link' class='form-control'/>
 	</div>
+	<div id='gallery'>
+		<ul>
+			<li data-ng-repeat="selfie in selfies"><img src={{selfie.dataUri}} alt=''/></li>
+		</ul>
+	</div>
 </section>

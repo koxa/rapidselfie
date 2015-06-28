@@ -8,8 +8,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.domainName = window.location.origin;
 		$scope.link = null;
 		//$scope.authentication = Authentication;
-		
-		$scope.showWebcam = function(){
+
+		$scope.showWebcam = function() {
 			$scope.dataUri = null;
 			$scope.fromLink = null;
 			window.Webcam.set({
@@ -21,18 +21,29 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 			window.Webcam.attach('#videoCapture');
 		}
 
+		$scope.listSelfies = function() {
+			$http.get('/selfie')
+				.success(function(selfies) {
+					$scope.selfies = selfies;
+				})
+				.error(function() {
+
+				})
+		}
+
 		if ($stateParams.selfieId) {
 			$http.get('/selfie/' + $stateParams.selfieId)
-				.success(function(data){
+				.success(function(data) {
 					$scope.dataUri = data.dataUri;
 					$scope.fromLink = true;
 				})
-				.error(function(){
+				.error(function() {
 					$scope.showWebcam();
 				})
 		}
 		else {
 			$scope.showWebcam();
+			$scope.listSelfies();
 		}
 
 		$scope.snap = function() {
@@ -53,6 +64,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				$scope.delete();
 				$scope.selfieId = data._id;
 				$scope.link = $scope.domainName + "/#!/" + $scope.selfieId;
+				$scope.listSelfies();
 			}).
 			error(function(data, status, headers, config) {
 				$scope.delete();

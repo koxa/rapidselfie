@@ -16,12 +16,26 @@ exports.read = function(req, res) {
 	res.json(req.selfie);
 };
 
+
 exports.selfieByID = function(req, res, next, id) {
 	Selfie.findById(id).exec(function(err, selfie) {
 		if (err) return next(err);
 		if (!selfie) return next(new Error('Failed to load selfie ' + id));
 		req.selfie = selfie;
 		next();
+	});
+};
+
+exports.list = function(req, res) {
+	Selfie.find().sort('-created').exec(function(err, selfies) {
+		if (err) {
+			return res.status(400).send({
+				//message: errorHandler.getErrorMessage(err)
+				message: err
+			});
+		} else {
+			res.json(selfies);
+		}
 	});
 };
 
