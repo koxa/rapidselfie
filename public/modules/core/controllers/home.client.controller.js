@@ -64,7 +64,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                         $scope.delete();
                         $scope.selfieId = data._id;
                         $scope.link = $scope.domainName + "/#!/" + $scope.selfieId;
-                        $scope.selfies.push(data);
+                        $scope.selfies.unshift(data);
                     }).
                     error(function (data, status, headers, config) {
                         $scope.delete();
