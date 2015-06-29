@@ -22,7 +22,7 @@
 	<div class='col2'>
 		<h3>Recent selfies</h3>
 		<ul id='gallery'>
-			<li data-ng-repeat="selfie in selfies"><img src={{selfie.dataUri}} alt='' /></li>
+			<li data-ng-repeat="selfie in selfies"><a href='{{domainName}}/#!/{{selfie._id}}'><img src={{selfie.dataUri}} alt='' /></a></li>
 		</ul>
 	</div>
 </section>
