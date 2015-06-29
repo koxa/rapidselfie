@@ -207,11 +207,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.dataUri = null;
         $scope.domainName = window.location.origin;
         $scope.link = null;
+        $scope.selfieId =  $stateParams.selfieId;
         //$scope.authentication = Authentication;
 
         $scope.showWebcam = function() {
             $scope.dataUri = null;
-            $scope.fromLink = null;
+            $scope.selfieId = null;
+            $scope.link = null;
+            //$scope.fromLink = null;
             window.Webcam.set({
                 width: 320,
                 height: 240,
@@ -232,11 +235,12 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 });
         };
 
-        if ($stateParams.selfieId) {
-            $http.get('/selfie/' + $stateParams.selfieId)
+        if ($scope.selfieId) {
+            $http.get('/selfie/' + $scope.selfieId)
                 .success(function(data) {
                     $scope.dataUri = data.dataUri;
-                    $scope.fromLink = true;
+                    $scope.caption = data.caption;
+                    //$scope.fromLink = true;
                 })
                 .error(function() {
                     $scope.showWebcam();
@@ -257,14 +261,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.delete = function() {
             $scope.dataUri = null;
+            $scope.selfieId = null;
+            $scope.link = null;
         };
 
         $scope.save = function() {
             $http.post('/selfie', {
+                caption: $scope.caption,
                 dataUri: $scope.dataUri
             }).
             success(function(data, status, headers, config) {
-                $scope.delete();
                 $scope.selfieId = data._id;
                 $scope.link = $scope.domainName + "/#!/" + $scope.selfieId;
                 $scope.selfies.unshift(data);

@@ -81,6 +81,17 @@ section {
 	text-align: center;
 }
 
+#captionForm{
+	margin-top: 20px;
+}
+#captionInput{
+	width: 320px;
+}
+#captionWrapper{
+	text-align: center;
+	font-weight: bold;
+}
+
 #btnContainer {
 	text-align: center;
 	margin-top: 20px;

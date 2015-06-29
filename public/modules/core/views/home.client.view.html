@@ -1,28 +1,34 @@
 <section data-ng-controller="HomeController" id='homeController'>
 	<div class='col1'>
 		<div id='menu'>
-			<h1>RapidSelfie</h1>
+			<h1><a href='/#!/'>RapidSelfie</a></h1>
 			<p>Snap a selfie, get a link, share it!</p>
 		</div>
 		<div id='snapArea'>
 			<div id='videoCapture' data-ng-show="!dataUri">Allow camera access to make selfie</div>
 			<div id='picturePreview' data-ng-show="dataUri"><img src="{{dataUri}}" /></div>
-			<div id='btnContainer'>
-				<input id='snapBtn' type='button' value='Snap Me!' data-ng-click='snap()' data-ng-show='!dataUri' class='btn btn-lg btn-default' />
-				<input id='deleteBtn' type='button' value='Delete' data-ng-click='delete()' data-ng-show='dataUri && !fromLink' class='btn btn-lg btn-default' />
-				<input id='saveBtn' type='button' value='Save' data-ng-click='save()' data-ng-show='dataUri && !fromLink' class='btn btn-lg btn-default' />
-				<input id='newSelfie' type='button' value='New Selfie' data-ng-click='showWebcam()' data-ng-show='fromLink' class='btn btn-lg btn-default' />
-			</div>
-			<div data-ng-show='link' id='linkContainer'>
-				<p>Link to your Selfie: </p>
-				<input type='text' value="{{link}}" id='link' class='form-control' />
-			</div>
+			<form id='captionForm' data-ng-submit='save()'>
+				<input type='text' data-ng-show='dataUri && !selfieId' id='captionInput' class='form-control' placeholder='Add a caption...' data-ng-model='caption' required='required' />
+				<div id='captionWrapper' data-ng-show='caption && selfieId' required='required'>{{caption}}</div>
+				<div data-ng-show='link' id='linkContainer'>
+					<p>Link to your Selfie: </p>
+					<input type='text' value="{{link}}" id='link' class='form-control' />
+				</div>
+				<div id='btnContainer'>
+					<input id='snapBtn' type='button' value='Snap Me!' data-ng-click='snap()' data-ng-show='!dataUri' class='btn btn-lg btn-default' />
+					<input id='deleteBtn' type='button' value='Delete' data-ng-click='delete()' data-ng-show='dataUri && !selfieId' class='btn btn-lg btn-default' />
+					<input id='saveBtn' type='submit' value='Save' data-ng-show='dataUri && !selfieId' class='btn btn-lg btn-default' />
+					<input id='newSelfie' type='button' value='New Selfie' data-ng-click='showWebcam()' data-ng-show='selfieId' class='btn btn-lg btn-default' />
+				</div>
+			</form>
 		</div>
 	</div>
 	<div class='col2'>
 		<h3>Recent selfies</h3>
 		<ul id='gallery'>
-			<li data-ng-repeat="selfie in selfies"><a href='{{domainName}}/#!/{{selfie._id}}'><img src={{selfie.dataUri}} alt='' /></a></li>
+			<li data-ng-repeat="selfie in selfies">
+				<a href='{{domainName}}/#!/{{selfie._id}}'><img src={{selfie.dataUri}} alt='' /></a>
+			</li>
 		</ul>
 	</div>
 </section>
